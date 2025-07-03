@@ -411,7 +411,7 @@ Function FileErrToMessage Global Integer iErr String sFileName Returns String
             Function_Return ("The scanned file '" + sFileName + "', is not matching the required file-types.")
             Case Break
         Case (iErr = C_FileMatch_FileDoesNotMatchContent)
-            Function_Return ("The scanned file '" + sFileName + "'s extention, does not match it's contents.")
+            Function_Return ("The scanned file '" + sFileName + "'s extension, does not match it's contents.")
             Case Break
         Case (iErr = C_FileMatch_No_Init)
             Function_Return "The file-detection tool could not be initialised."
