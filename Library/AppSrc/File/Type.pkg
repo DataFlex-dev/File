@@ -101,8 +101,6 @@ External_Function magic_check    "magic_check"    C_MAGIC_MODULE_NAME Pointer pM
 { Visibility=Private }
 External_Function magic_load     "magic_load"     C_MAGIC_MODULE_NAME Pointer pMagic Pointer pMagicFile Returns Integer
 { Visibility=Private }
-External_Function magic_file     "magic_file"     C_MAGIC_MODULE_NAME Pointer pMagic String sFilePath Returns String
-{ Visibility=Private }
 External_Function magic_close    "magic_close"    C_MAGIC_MODULE_NAME Pointer pMagic Returns VOID_TYPE
 { Visibility=Private }
 External_Function magic_error    "magic_error"    C_MAGIC_MODULE_NAME Pointer pMagic Returns Pointer
@@ -223,6 +221,34 @@ Function FileGlobalInit Global Returns Boolean
     Function_Return True
 End_Function
 
+#IFNDEF C_File_LoadInitialBufferSize
+Define C_File_LoadInitialBufferSize for 4096
+#ENDIF
+
+Function magic_file Global Pointer pMagic String sFileName Returns String
+    Integer iChannel
+    String sValue
+    UChar[] ucaFileBuffer
+    
+    Move (Seq_New_Channel()) to iChannel
+    If (iChannel = DF_SEQ_CHANNEL_NOT_AVAILABLE) Function_Return ""
+    
+    Direct_Input channel iChannel ("binary: " + sFileName)
+    Read_Block channel iChannel ucaFileBuffer C_File_LoadInitialBufferSize
+    Close_Input channel iChannel  // close input channel 
+    Send Seq_Release_Channel iChannel
+    
+    If (SizeOfArray(ucaFileBuffer) = 0) Begin
+        Function_Return ""
+    End
+    
+    Send MagicGlobalSetAttr C_MAGIC_MIME_TYPE
+    Move (magic_buffer(pMagic, AddressOf(ucaFileBuffer), SizeOfArray(ucaFileBuffer))) to sValue
+    Send MagicGlobalUnSetAttr C_MAGIC_MIME_TYPE
+    
+    Function_Return sValue
+End_Function
+
 { Visibility=Private }
 Function FileGlobalClose Global Returns Boolean
     If (not(__Magic)) Function_Return True
@@ -243,7 +269,7 @@ Function FileMimeType Global String sFileName Returns String
 End_Function
 
 Function FileMimeTypeOfBufferEx Global Pointer pBuffer Longptr lSize Returns String
-    If (not(FileGlobalInit())) Begin
+    If (not(FileGlobalInit()) or lSize = 0) Begin
         Function_Return ""
     End
     String sValue
@@ -269,7 +295,7 @@ Function FileMimeEncoding Global String sFileName Returns String
 End_Function
 
 Function FileMimeEncodingOfBufferEx Global Pointer pBuffer Longptr lSize Returns String
-    If (not(FileGlobalInit())) Begin
+    If (not(FileGlobalInit()) or lSize = 0) Begin
         Function_Return ""
     End
     String sValue
@@ -293,7 +319,7 @@ Function FileDescription Global String sFileName Returns String
 End_Function
 
 Function FileDescriptionOfBufferEx Global Pointer pBuffer Longptr lSize Returns String
-    If (not(FileGlobalInit())) Begin
+    If (not(FileGlobalInit()) or lSize = 0) Begin
         Function_Return ""
     End
     String sValue
