@@ -539,6 +539,7 @@ application/x-msterminal			trm
 application/x-mswrite				wri
 application/x-netcdf				nc cdf
 application/x-nzb				nzb
+application/x-ole-storage           rpt
 application/x-pkcs12				p12 pfx
 application/x-pkcs7-certificates		p7b spc
 application/x-pkcs7-certreqresp			p7r
@@ -692,7 +693,7 @@ text/css					css
 text/csv					csv
 text/html					html htm
 text/n3						n3
-text/plain					txt text conf def list log in out pkg csv js
+text/plain					txt text conf def list log in out pkg csv js src wo
 text/prs.lines.tag				dsc
 text/richtext					rtx
 text/sgml					sgml sgm
