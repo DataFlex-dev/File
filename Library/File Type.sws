@@ -1,0 +1,18 @@
+{
+    "description": "Determine file types based on associated MIME types.",
+    "df": 26.0,
+    "package": {
+        "df-max": 26.0,
+        "df-min": 26.0,
+        "icon": "Icon.png",
+        "install": [
+            "${Programs}/*.dll",
+            "${programs}/*.mgc"
+        ],
+        "version": "1.0.0"
+    },
+    "paths": {
+        "configFile": "Config.ws",
+        "fileList": "DummyFilelist.cfg"
+    }
+}
