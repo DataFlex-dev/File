@@ -738,7 +738,7 @@ video/mj2					mj2 mjp2
 video/mp4					mp4 mp4v mpg4
 video/mpeg					mpeg mpg mpe m1v m2v
 video/ogg					ogv
-video/quicktime					qt mov
+video/quicktime					qt mov mp4
 video/vnd.dece.hd				uvh uvvh
 video/vnd.dece.mobile				uvm uvvm
 video/vnd.dece.pd				uvp uvvp
