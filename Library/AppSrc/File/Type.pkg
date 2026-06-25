@@ -396,10 +396,12 @@ Function FileMatchesPattern Global String sPattern String sFilename Boolean bOpt
         Move (RightPos(".", sFilename)) to iPos
         If (iPos) Move (Right(sFilename, Length(sFilename) - iPos)) to sExt
     End
+	Move (Lowercase(Replace(".", Trim(sExt), ""))) to sExt													  
     
     String sMime
     Get FileMimeType sFilename to sMime
     If (SizeOfString(sMime) = 0) Function_Return C_FileMatch_File_Not_Found
+	Move (Lowercase(sMime)) to sMime								
     
     If (not(FileExtMatchesMime(sMime, sExt)) and bMatchContent) Begin
         Function_Return C_FileMatch_FileDoesNotMatchContent 
