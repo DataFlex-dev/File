@@ -9,6 +9,7 @@
             "${Programs}/*.dll",
             "${programs}/*.mgc"
         ],
+        "license": "BSD-3-Clause",
         "version": "1.0.1"
     },
     "paths": {
