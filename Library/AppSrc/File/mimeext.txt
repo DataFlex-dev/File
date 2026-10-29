@@ -541,7 +541,7 @@ application/x-msterminal			trm
 application/x-mswrite				wri
 application/x-netcdf				nc cdf
 application/x-nzb				nzb
-application/x-ole-storage           rpt
+application/x-ole-storage           		rpt msg
 application/x-pkcs12				p12 pfx
 application/x-pkcs7-certificates		p7b spc
 application/x-pkcs7-certreqresp			p7r
